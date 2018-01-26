@@ -22,7 +22,7 @@ Most beginners don’t know how to glue React and Webpack together so here is a 
 - how to include the resulting bundle into an HTML page
 - how to install and configure Webpack Dev Server
 
-**React** is not limited to full blown SPA. It’s possible to integrate the library into any existing website.
+`**React**` is not limited to full blown SPA. It’s possible to integrate the library into any existing website.
 
 React can be pulled in either with a CDN or with a module bundler.
 
@@ -54,7 +54,7 @@ and you’re good to go.
 
 ## 3. How to set up React, Webpack, and Babel: setting up Webpack
 
-**Webpack** is one of the pillars of modern Web Development. It’s an incredibly powerful tool even if some people hate it.
+`**Webpack**` is one of the pillars of modern Web Development. It’s an incredibly powerful tool even if some people hate it.
 
 There are alternatives: Brunch is one of the contenders. Either way knowing how to use Webpack is fundamental for working with React.
 
@@ -72,7 +72,7 @@ Now add the webpackcommand inside package.json:
   "build": "webpack"
 }
 ```
-Whenever you run webpack it will automatically look for a configuration file. Create a new file named webpack.config.jsinside the project folder:
+Whenever you run webpack it will automatically look for a configuration file. Create a new file named `webpack.config.js` inside the project folder:
 
 ```
 touch webpack.config.js
@@ -82,20 +82,20 @@ Right now the file is empty but we will add a meaningful configuration in the ne
 
 ## 4. How to set up React, Webpack, and Babel: setting up Babel
 
-**React components** are mostly written in **Javascript ES6**.
+`**React components**` are mostly written in `**Javascript ES6**`.
 
 Since the browser can’t understand React components as they come there is the need for some kind of transformation.
 
-Webpack doesn’t know how to make the transformation but it has this concept of **loaders**: think of them as of transformers.
+Webpack doesn’t know how to make the transformation but it has this concept of `**loaders**`: think of them as of transformers.
 
-A **Webpack loader** takes something as the input and produces something else as the output.
+A `**Webpack loader**` takes something as the input and produces something else as the output.
 
 `babel-loader` is the Webpack loader responsible for taking in the ES6 code and making it understandable by the browser of choice.
 
 Obsviusly `babel-loadermakes` use of Babel. And Babel must be configured to use a bunch of presets:
 
-1. **babel-preset-env** for compiling Javascript ES6 code down to ES5 (please note that babel-preset-es2015 is now deprecated)
-2. **babel-preset-react** for compiling JSX and other stuff down to Javascript
+1. `**babel-preset-env**` for compiling Javascript ES6 code down to ES5 (please note that babel-preset-es2015 is now deprecated)
+2. `**babel-preset-react**` for compiling JSX and other stuff down to Javascript
 
 Let’s pull in the dependencies with:
 
@@ -113,9 +113,9 @@ Don’t forget to configure Babel! Create a new file named .babelrcinside the pr
 
 At this point we’re ready to define a minimal Webpack configuration.
 
-Open up **webpack.config.js** and fill it like the following:
+Open up `**webpack.config.js**` and fill it like the following:
 
-```
+```javascript
 const path = require("path");
 module.exports = {
   entry: ["./src/js/app.js"],
@@ -139,9 +139,9 @@ module.exports = {
 
 The above configuration is quite simple.
 
-It takes **./src/js/app.jsas** the entry point to produce an ouput into **./dist/js/main.js**
+It takes `**./src/js/app.jsas**` the entry point to produce an ouput into `**./dist/js/main.js**`
 
-Plus, for every file with a **.js** extension Webpack pipes the code through babel-loader for transforming ES6 down to ES5.
+Plus, for every file with a `**.js**` extension Webpack pipes the code through `babel-loader` for transforming ES6 down to ES5.
 
 **NOTE:** If you’re completely new to Webpack I suggest taking this short introduction: <a href="https://webpack.academy/p/the-core-concepts" title="Title">***webpack core concepts by Sean Larkin***</a>. Then come back here.
 
@@ -188,7 +188,7 @@ touch src/js/components/container/FormContainer.js
 
 The component will look like the following:
 
-```
+```javascript
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 class FormContainer extends Component {
@@ -214,7 +214,7 @@ In fact a container component without its presentational child is almost useless
 
 Let’s fix that.
 
-Create a new component inside `src/js/components/presentational/:`
+Create a new component inside `**src/js/components/presentational/**`:
 
 ```
 touch src/js/components/presentational/Input.js
@@ -228,7 +228,7 @@ Our first presentational React component will be a text input. We know that an H
 - value
 - required
 
-All of these will become **props that the container component will pass down to its presentational child**.
+All of these will become `**props that the container component will pass down to its presentational child**`.
 
 Since the input holds its own state we must be sure that React will take care of it. An HTML input becomes a controlled component in React.
 

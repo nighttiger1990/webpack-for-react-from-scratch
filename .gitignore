@@ -1,2 +1,4 @@
 # Skip node_modules
 node_modules/
+# Skip build file after `npm run build`
+dist/

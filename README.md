@@ -52,7 +52,7 @@ npm init -y
 
 and you’re good to go.
 
-## 3. How to set up React, Webpack, and Babel: setting up Webpack
+## 3. How to set up `React`, `Webpack`, and `Babel`: setting up Webpack
 
 `Webpack` is one of the pillars of modern Web Development. It’s an incredibly powerful tool even if some people hate it.
 
@@ -67,7 +67,7 @@ npm i webpack --save-dev
 ```
 
 Now add the webpackcommand inside package.json:
-```
+```json
 "scripts": {
   "build": "webpack"
 }
@@ -92,15 +92,15 @@ A `Webpack loader` takes something as the input and produces something else as t
 
 `babel-loader` is the Webpack loader responsible for taking in the ES6 code and making it understandable by the browser of choice.
 
-Obsviusly `babel-loadermakes` use of Babel. And Babel must be configured to use a bunch of presets:
+Obsviusly `babel-loader` makes use of Babel. And Babel must be configured to use a bunch of presets:
 
-1. `babel-preset-env` for compiling Javascript ES6 code down to ES5 (please note that babel-preset-es2015 is now deprecated)
+1. `babel-preset-env` for compiling Javascript ES6 code down to ES5 (please note that `babel-preset-es2015` is now `deprecated`. Note: <a href="https://babeljs.io/docs/plugins/transform-class-properties/">**babel-plugin-transform-class-properties**</a> is This plugin `transforms es2015 static class properties` as well as properties declared with the `es2016 property initializer syntax`.)
 2. `babel-preset-react` for compiling JSX and other stuff down to Javascript
 
 Let’s pull in the dependencies with:
 
 ```
-npm i babel-loader babel-core babel-preset-env babel-preset-react --save-dev
+npm i babel-loader babel-core babel-preset-env babel-preset-react babel-plugin-transform-class-properties --save-dev
 ```
 
 Don’t forget to configure Babel! Create a new file named .babelrcinside the project folder:
@@ -126,10 +126,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader"
+          options: {
+            // presets: ['@babel/preset-env'],
+            plugins: ['transform-class-properties']
+          }
         }
       }
     ]
@@ -139,9 +143,9 @@ module.exports = {
 
 The above configuration is quite simple.
 
-It takes `./src/js/app.jsas` the entry point to produce an ouput into `./dist/js/main.js`
+It takes `./src/js/app.js` as the entry point to produce an ouput into `./dist/js/main.js`
 
-Plus, for every file with a `.js` extension Webpack pipes the code through `babel-loader` for transforming ES6 down to ES5.
+Plus, for every file with a `.js` or `.jsx` extension Webpack pipes the code through `babel-loader` for transforming ES6 down to ES5.
 
 **NOTE:** If you’re completely new to Webpack I suggest taking this short introduction: <a href="https://webpack.academy/p/the-core-concepts" title="Title">***webpack core concepts by Sean Larkin***</a>. Then come back here.
 
@@ -376,7 +380,11 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
+          options: {
+            // presets: ['@babel/preset-env'],
+            plugins: ['transform-class-properties']
+          }
         }
       },
       {
@@ -399,9 +407,9 @@ module.exports = {
 ```
 
 
-Next up reate an HTML file into `./src/index.html` (feel free to use whichever CSS library you like):
+Next up create an HTML file into `./src/index.html` (feel free to use whichever CSS library you like):
 
-```javascript
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -472,7 +480,8 @@ Configure the server by adding the following lines inside `webpack.config.js` (t
 
 ```
 devServer: {
-  contentBase: "./dist"
+  contentBase: "./dist",
+  port: 8888
 }
 ```
 
